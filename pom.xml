@@ -12,6 +12,8 @@
         <module>order-service</module>
         <module>item-service</module>
         <module>feign-api</module>
+        <module>gateway</module>
+        <module>search-service</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -30,10 +32,17 @@
         <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
         <mysql.version>5.1.47</mysql.version>
         <mybatis.plus.version>3.4.3</mybatis.plus.version>
+        <elasticsearch.version>7.12.1</elasticsearch.version>
+        <hutool.version>5.8.20</hutool.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
             <!-- springCloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -62,12 +71,38 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--提高Feign的性能主要手段就是使用**连接池**代替默认的URLConnection。-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
         </dependency>
     </dependencies>
 </project>
