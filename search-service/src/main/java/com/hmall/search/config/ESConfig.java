@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ESConfig {
     @Bean
-    public RestHighLevelClient restClient() {
-        return new RestHighLevelClient(
-                RestClient.builder(HttpHost.create("http://192.168.200.140:9200"))
-        );
+    public RestHighLevelClient restHighLevelClient() {
+        return new RestHighLevelClient(RestClient.builder(HttpHost.create("http://localhost:9200")));
     }
 }

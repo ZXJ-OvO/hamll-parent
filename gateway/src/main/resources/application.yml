@@ -1,0 +1,47 @@
+server:
+  port: 10010
+spring:
+  main:
+    banner-mode: "console"
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: f387d84c-e075-4dad-94f4-50aa31310467
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - http://localhost:9001
+              - http://localhost:9002
+              - http://127.0.0.1:9001
+              - http://127.0.0.1:9002
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: userservice
+          uri: lb://userservice
+          predicates:
+            - Path=/user/**,/address/**     # 修正路径配置
+        - id: orderservice
+          uri: lb://orderservice
+          predicates:
+            - Path=/order/**,/pay/**         # 修正路径配置
+        - id: itemservice
+          uri: lb://itemservice
+          predicates:
+            - Path=/item/**
+        - id: searchservice
+          uri: lb://searchservice
+          predicates:
+            - Path=/search/**
+  application:
+    name: gateway

@@ -17,7 +17,7 @@ public class OrderLogistics{
     /**
      * 订单id，与订单表一对一
      */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long orderId;
     /**
      * 物流单号

@@ -1,0 +1,21 @@
+server:
+  port: 8084
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: /
+    username: root
+    password: root
+  application:
+    name: searchservice
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: f387d84c-e075-4dad-94f4-50aa31310467
+logging:
+  level:
+    cn.itcast: debug
+  pattern:
+    dateformat: HH:mm:ss:SSS
